@@ -31,3 +31,15 @@ bool APipeDream::GoalReached()
 {
 	return fuelDream->checkFlowReachedGoal();
 }
+
+float APipeDream::GetSegmentFillAmount(int x, int y) {
+	return fuelDream->getSegment(x, y)->fill_amount;
+}
+
+int APipeDream::GetSegmentFillSide(int x, int y) {
+	return fuelDream->getSegment(x, y)->fill_side;
+}
+
+int APipeDream::GetSegmentLeakSide(int x, int y) {
+	return fuelDream->getSegment(x, y)->leaking_from;
+}

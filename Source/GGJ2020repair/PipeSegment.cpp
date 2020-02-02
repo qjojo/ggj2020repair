@@ -15,6 +15,7 @@ void PipeSegment::reset() {
   fill_amount = 0;
   full = false;
   leaking = false;
+  leaking_from = -1;
 }
 
 int PipeSegment::getType() {

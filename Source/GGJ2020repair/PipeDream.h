@@ -36,4 +36,13 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	bool GoalReached();
+
+	UFUNCTION(BlueprintCallable)
+	float GetSegmentFillAmount(int x, int y);
+
+	UFUNCTION(BlueprintCallable)
+	int GetSegmentFillSide(int x, int y);
+
+	UFUNCTION(BlueprintCallable)
+	int GetSegmentLeakSide(int x, int y);
 };
