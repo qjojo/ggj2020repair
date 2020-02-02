@@ -32,6 +32,14 @@ bool APipeDream::GoalReached()
 	return fuelDream->checkFlowReachedGoal();
 }
 
+void APipeDream::PlaceSegment(int type, int x, int y) {
+	fuelDream->placeSegment(type, x, y);
+}
+
+int APipeDream::GetSegmentType(int x, int y) {
+	return fuelDream->getSegment(x, y)->type;
+}
+
 float APipeDream::GetSegmentFillAmount(int x, int y) {
 	return fuelDream->getSegment(x, y)->fill_amount;
 }

@@ -38,6 +38,12 @@ public:
 	bool GoalReached();
 
 	UFUNCTION(BlueprintCallable)
+	void PlaceSegment(int type, int x, int y);
+
+	UFUNCTION(BlueprintCallable)
+	int GetSegmentType(int x, int y);
+
+	UFUNCTION(BlueprintCallable)
 	float GetSegmentFillAmount(int x, int y);
 
 	UFUNCTION(BlueprintCallable)
