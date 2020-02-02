@@ -4,14 +4,20 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+
+#include "FuelDream.h"
+
 #include "PipeDream.generated.h"
+
 
 UCLASS()
 class GGJ2020REPAIR_API APipeDream : public AActor
 {
 	GENERATED_BODY()
-	
-public:	
+
+	FuelDream* fuelDream;
+
+public:
 	// Sets default values for this actor's properties
 	APipeDream();
 
@@ -19,12 +25,15 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-public:	
+public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+
 	UFUNCTION(BlueprintPure)
 	static int TestUMethod(int a) {
 		return a + 2;
 	}
 
+	UFUNCTION(BlueprintCallable)
+	bool GoalReached();
 };

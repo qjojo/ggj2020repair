@@ -9,19 +9,25 @@ APipeDream::APipeDream()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
+	fuelDream = new FuelDream();
 }
 
 // Called when the game starts or when spawned
 void APipeDream::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	fuelDream->generateTestField();
+	fuelDream->startFlow(3, 3, 0);
 }
 
 // Called every frame
 void APipeDream::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
+	fuelDream->tick(DeltaTime);
 }
 
+bool APipeDream::GoalReached()
+{
+	return fuelDream->checkFlowReachedGoal();
+}
