@@ -3,8 +3,8 @@
 //#include "CoreMinimal.h"
 #include "PipeSegment.h"
 
-#define FUEL_DREAM_FIELD_WIDTH 8
-#define FUEL_DREAM_FIELD_HEIGHT 8
+#define FUEL_DREAM_FIELD_WIDTH 9
+#define FUEL_DREAM_FIELD_HEIGHT 9
 
 /*
 #define LogFuelDream 0
