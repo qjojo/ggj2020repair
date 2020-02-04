@@ -27,6 +27,10 @@ void APipeDream::Tick(float DeltaTime)
 	fuelDream->tick(DeltaTime);
 }
 
+void APipeDream::StartFlow() {
+	fuelDream->startFlow();
+}
+
 bool APipeDream::GoalReached()
 {
 	return fuelDream->checkFlowReachedGoal();
@@ -46,6 +50,10 @@ float APipeDream::GetSegmentFillAmount(int x, int y) {
 
 int APipeDream::GetSegmentFillSide(int x, int y) {
 	return fuelDream->getSegment(x, y)->fill_side;
+}
+
+int APipeDream::GetSegmentExitSide(int x, int y) {
+	return fuelDream->getSegment(x, y)->getExit();
 }
 
 int APipeDream::GetSegmentLeakSide(int x, int y) {

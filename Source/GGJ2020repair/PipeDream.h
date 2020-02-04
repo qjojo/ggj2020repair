@@ -29,10 +29,8 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	UFUNCTION(BlueprintPure)
-	static int TestUMethod(int a) {
-		return a + 2;
-	}
+	UFUNCTION(BlueprintCallable)
+	void StartFlow();
 
 	UFUNCTION(BlueprintCallable)
 	bool GoalReached();
@@ -48,6 +46,9 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	int GetSegmentFillSide(int x, int y);
+
+	UFUNCTION(BlueprintCallable)
+	int GetSegmentExitSide(int x, int y);
 
 	UFUNCTION(BlueprintCallable)
 	int GetSegmentLeakSide(int x, int y);
