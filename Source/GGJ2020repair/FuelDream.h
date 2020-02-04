@@ -3,8 +3,8 @@
 //#include "CoreMinimal.h"
 #include "PipeSegment.h"
 
-#define FUEL_DREAM_FIELD_WIDTH 9
-#define FUEL_DREAM_FIELD_HEIGHT 9
+#define FUEL_DREAM_FIELD_WIDTH 11
+#define FUEL_DREAM_FIELD_HEIGHT 11
 
 /*
 #define LogFuelDream 0
@@ -50,10 +50,13 @@ public:
   int walkFlow(PipeSegment& seg);
   void tick(float delta);
 
+  void setGoal(int x, int y, int side);
   void startFlow(int x, int y, int side);
   void leak(PipeSegment& seg, int side);
-  bool checkFlowReachedGoal();
   void win();
+
+  bool checkLeaking();
+  bool checkFlowReachedGoal();
 
   void log(const char* message);
 };

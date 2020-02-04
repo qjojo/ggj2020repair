@@ -30,7 +30,13 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	UFUNCTION(BlueprintCallable)
-	void StartFlow();
+	void SetGoal(int x, int y, int side);
+
+	UFUNCTION(BlueprintCallable)
+	void StartFlow(int x, int y, int side);
+
+	UFUNCTION(BlueprintCallable)
+	bool Leaking();
 
 	UFUNCTION(BlueprintCallable)
 	bool GoalReached();

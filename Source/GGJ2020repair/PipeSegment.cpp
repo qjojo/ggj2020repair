@@ -38,6 +38,37 @@ float PipeSegment::getFillAmount() {
   return fill_amount;
 }
 
+bool PipeSegment::validEntrance(int side) {
+  switch(type) {
+    case SEG_EMPTY:
+      return false;
+
+    case SEG_STRAIGHT_VERTICAL:
+      return side == SIDE_TOP || side == SIDE_BOTTOM;
+
+    case SEG_STRAIGHT_HORIZONTAL:
+      return side == SIDE_LEFT || side == SIDE_RIGHT;
+
+    case SEG_STRAIGHT_CROSS:
+      return true;
+
+    case SEG_CORNER_TOP_RIGHT:
+      return side == SIDE_TOP || side == SIDE_RIGHT;
+
+    case SEG_CORNER_TOP_LEFT:
+      return side == SIDE_TOP || side == SIDE_LEFT;
+
+    case SEG_CORNER_BOTTOM_RIGHT:
+      return side == SIDE_BOTTOM || side == SIDE_RIGHT;
+
+    case SEG_CORNER_BOTTOM_LEFT:
+      return side == SIDE_BOTTOM || side == SIDE_LEFT;
+
+    default:
+      return false;
+  }
+}
+
 int PipeSegment::getExit() {
   switch(type) {
     case SEG_EMPTY:

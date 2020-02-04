@@ -62,12 +62,17 @@ void FuelDream::placeSegment(int type, int x, int y) {
   PipeSegment& seg = *(field[x][y]);
   seg.reset();
   seg.setType(type);
+
+  sprintf(msg, "segment placed: type - %d, %d,%d", type, x, y);
+  log(msg);
 }
 
 int FuelDream::walkFlow(PipeSegment& seg) {
   if (seg.fill_amount < 1.0) return -1;
 
   int exit_side = seg.getExit();
+  sprintf(msg, "walking: fill_side - %d, exit_side - %d", seg.fill_side, exit_side);
+  log(msg);
 
   if (checkFlowReachedGoal()) {
     win();
@@ -113,17 +118,20 @@ void FuelDream::tick(float delta) {
     seg->fill_amount = seg->fill_amount + tick_fill;
 
     while (seg->fill_amount > 1.0f) {
-      sprintf(msg, "segment filled: %d,%d .. %d,%d", seg->x, seg->y, at_pipe_x, at_pipe_y);
+      sprintf(msg, "segment filled: %d,%d", seg->x, seg->y);
       log(msg);
       float overflow = seg->fill_amount - 1.0f; // extra fill for next piece
       seg->fill_amount = 1.0f;
       seg->full = true;
 
       int entrance_side = walkFlow(*seg);
+      if (goal_reached) return;
 
       PipeSegment* next_seg = getCurrentSegment();
 
-      if (next_seg->getType() == SEG_EMPTY) {
+      if (next_seg->getType() == SEG_EMPTY || !next_seg->validEntrance(entrance_side)) {
+        sprintf(msg, "can't enter: %d,%d - type %d", at_pipe_x, at_pipe_y, next_seg->getType());
+        log(msg);
         leak(*seg, seg->getExit());
       }
       else {
@@ -139,7 +147,15 @@ void FuelDream::tick(float delta) {
   }
 }
 
+void FuelDream::setGoal(int x, int y, int side) {
+  goal_x = x;
+  goal_y = y;
+  goal_side = side;
+}
+
 void FuelDream::startFlow(int x, int y, int fill_side) {
+  if (flowing || leaking || goal_reached) return;
+
   flowing = true;
   at_pipe_x = x;
   at_pipe_y = y;
@@ -160,6 +176,16 @@ void FuelDream::leak(PipeSegment& seg, int side) {
   leaking = true;
 }
 
+void FuelDream::win() {
+  log("goal reached");
+  flowing = false;
+  goal_reached = true;
+}
+
+bool FuelDream::checkLeaking() {
+  return leaking;
+}
+
 bool FuelDream::checkFlowReachedGoal() {
   if (leaking) return false;
   if (goal_reached) return true;
@@ -173,14 +199,6 @@ bool FuelDream::checkFlowReachedGoal() {
 
   return false;
 }
-
-void FuelDream::win() {
-  log("goal reached");
-  flowing = false;
-  goal_reached = true;
-}
-
-
 
 void FuelDream::log(const char* message) {
   //UE_LOG(LogFuelDream, Log, TEXT(message));

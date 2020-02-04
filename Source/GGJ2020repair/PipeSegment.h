@@ -46,5 +46,7 @@ public:
   int getLeakingSide();
   bool getFull();
   float getFillAmount();
+
+  bool validEntrance(int side);
   int getExit();
 };

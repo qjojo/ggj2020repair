@@ -16,8 +16,9 @@ APipeDream::APipeDream()
 void APipeDream::BeginPlay()
 {
 	Super::BeginPlay();
-	fuelDream->generateTestField();
-	fuelDream->startFlow(3, 3, 0);
+	//fuelDream->generateTestField();
+	//fuelDream->startFlow(10, 10, 1);
+	//fuelDream->startFlow(0, 0, 1);
 }
 
 // Called every frame
@@ -27,8 +28,17 @@ void APipeDream::Tick(float DeltaTime)
 	fuelDream->tick(DeltaTime);
 }
 
-void APipeDream::StartFlow() {
-	fuelDream->startFlow();
+void APipeDream::SetGoal(int x, int y, int side) {
+	fuelDream->setGoal(x, y, side);
+}
+
+void APipeDream::StartFlow(int x, int y, int side) {
+	fuelDream->startFlow(x, y, side);
+}
+
+bool APipeDream::Leaking()
+{
+	return fuelDream->checkLeaking();
 }
 
 bool APipeDream::GoalReached()
